@@ -66,10 +66,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-gradient {
-    background: var(--gradient);
+    background: linear-gradient(135deg, #2d7d32, #6b9b4f);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    display: inline;
+    font-weight: inherit;
 }
 
 /* Buttons */
