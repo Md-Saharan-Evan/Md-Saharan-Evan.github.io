@@ -1,10 +1,12 @@
 # Md Saharan Evan - Portfolio Website
 
-A modern, responsive portfolio website built with HTML, CSS, and JavaScript featuring a dark theme and smooth animations.
+A modern, responsive portfolio website built with HTML, CSS, and JavaScript featuring a light, natural theme and professional design.
+
+🌐 **Live Website**: [https://md-saharan-evan.github.io](https://md-saharan-evan.github.io)
 
 ## Features
 
-- 🎨 Modern dark theme design
+- 🎨 Light and natural theme design
 - 📱 Fully responsive layout
 - ⚡ Smooth animations and transitions
 - 🚀 Performance optimized
@@ -13,6 +15,7 @@ A modern, responsive portfolio website built with HTML, CSS, and JavaScript feat
 - 💫 Interactive elements and hover effects
 - 📊 Animated statistics counters
 - 🌟 Typing animation effects
+- 🌿 Green accent colors for a natural feel
 
 ## Sections
 
