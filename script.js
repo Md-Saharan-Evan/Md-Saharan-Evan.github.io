@@ -225,8 +225,8 @@ function applyTheme(theme) {
     }
 }
 
-const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+// Light theme by default; only switch to dark if the visitor has chosen it before
+const savedTheme = localStorage.getItem('theme') || 'light';
 applyTheme(savedTheme);
 
 themeToggles.forEach(btn => {
@@ -308,9 +308,47 @@ if (sideStats) {
 }
 
 // ============================================================
+// Profile photo lightbox
+// ============================================================
+const profileImageTrigger = document.getElementById('profile-image-trigger');
+const lightbox = document.getElementById('lightbox');
+const lightboxClose = document.getElementById('lightbox-close');
+const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+
+function openLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+if (profileImageTrigger) {
+    profileImageTrigger.addEventListener('click', openLightbox);
+    profileImageTrigger.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLightbox();
+        }
+    });
+}
+
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+});
+
+// ============================================================
 // Contact form handling
 // ============================================================
 const contactForm = document.getElementById('contact-form');
+const CONTACT_EMAIL = 'mdsaharanevan20001@gmail.com';
 
 if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
@@ -332,7 +370,11 @@ if (contactForm) {
             return;
         }
 
-        showNotification('Message sent successfully! I will get back to you soon.', 'success');
+        const body = `${message}\n\n— ${name} (${email})`;
+        const mailtoLink = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailtoLink;
+        showNotification('Opening your email app to send the message…', 'success');
         contactForm.reset();
     });
 }
