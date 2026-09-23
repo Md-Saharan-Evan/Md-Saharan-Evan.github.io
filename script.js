@@ -1,37 +1,160 @@
-// Mobile Navigation Toggle
-const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.getElementById('nav-menu');
+// ============================================================
+// Animated neural-network background
+// ============================================================
+(function initNeuralBackground() {
+    const canvas = document.getElementById('neural-canvas');
+    if (!canvas) return;
 
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    navToggle.classList.toggle('active');
-});
+    const ctx = canvas.getContext('2d');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
+    let particles = [];
+    let themeColors = { bg: '#f6f7fb', nodes: [[124, 58, 237], [6, 182, 212], [236, 72, 153]] };
+
+    function hexToRgb(hex) {
+        const clean = hex.replace('#', '').trim();
+        const bigint = parseInt(clean, 16);
+        return [(bigint >> 16) & 255, (bigint >> 8) & 255, bigint & 255];
+    }
+
+    function readThemeColors() {
+        const styles = getComputedStyle(document.documentElement);
+        const bg = styles.getPropertyValue('--bg-color').trim();
+        const primary = styles.getPropertyValue('--primary-color').trim();
+        const secondary = styles.getPropertyValue('--secondary-color').trim();
+        const accent = styles.getPropertyValue('--accent-color').trim();
+
+        themeColors = {
+            bg,
+            nodes: [hexToRgb(primary), hexToRgb(secondary), hexToRgb(accent)]
+        };
+    }
+
+    class Node {
+        constructor(width, height) {
+            this.x = Math.random() * width;
+            this.y = Math.random() * height;
+            this.vx = (Math.random() - 0.5) * 0.35;
+            this.vy = (Math.random() - 0.5) * 0.35;
+            this.radius = Math.random() * 1.4 + 1.2;
+            this.colorIndex = Math.floor(Math.random() * 3);
+        }
+
+        step(width, height) {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x <= 0 || this.x >= width) this.vx *= -1;
+            if (this.y <= 0 || this.y >= height) this.vy *= -1;
+        }
+    }
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const area = canvas.width * canvas.height;
+        const count = Math.min(110, Math.max(35, Math.floor(area / 15000)));
+        particles = Array.from({ length: count }, () => new Node(canvas.width, canvas.height));
+    }
+
+    function drawFrame() {
+        ctx.fillStyle = themeColors.bg || '#0b0e18';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const linkDistance = 130;
+
+        particles.forEach(p => p.step(canvas.width, canvas.height));
+
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const a = particles[i];
+                const b = particles[j];
+                const dx = a.x - b.x;
+                const dy = a.y - b.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < linkDistance) {
+                    const opacity = (1 - dist / linkDistance) * 0.3;
+                    const [r, g, bl] = themeColors.nodes[a.colorIndex];
+                    ctx.strokeStyle = `rgba(${r}, ${g}, ${bl}, ${opacity})`;
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        particles.forEach(p => {
+            const [r, g, bl] = themeColors.nodes[p.colorIndex];
+            ctx.fillStyle = `rgba(${r}, ${g}, ${bl}, 0.75)`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        if (!prefersReducedMotion) {
+            requestAnimationFrame(drawFrame);
+        }
+    }
+
+    readThemeColors();
+    resizeCanvas();
+    drawFrame();
+
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        if (prefersReducedMotion) drawFrame();
     });
+
+    window.neuralBackground = { refreshTheme: readThemeColors };
+})();
+
+// ============================================================
+// Mobile sidebar (off-canvas menu)
+// ============================================================
+const sidebar = document.getElementById('sidebar');
+const sidebarToggle = document.getElementById('sidebar-toggle');
+const sidebarClose = document.getElementById('sidebar-close');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+function openSidebar() {
+    sidebar.classList.add('open');
+    sidebarOverlay.classList.add('active');
+}
+
+function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('active');
+}
+
+if (sidebarToggle) sidebarToggle.addEventListener('click', openSidebar);
+if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar);
+
+// Close the mobile sidebar whenever a nav link inside it is clicked
+document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+    link.addEventListener('click', closeSidebar);
 });
 
-// Smooth scrolling for navigation links
+// ============================================================
+// Smooth scrolling for in-page links
+// ============================================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
 
-// Active navigation link highlighting
+// ============================================================
+// Active section highlighting in the side nav
+// ============================================================
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-link');
+const sideNavLinks = document.querySelectorAll('.side-nav-link');
 
 function highlightActiveSection() {
     const scrollY = window.pageYOffset;
@@ -42,7 +165,7 @@ function highlightActiveSection() {
         const sectionId = current.getAttribute('id');
 
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
+            sideNavLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${sectionId}`) {
                     link.classList.add('active');
@@ -52,156 +175,178 @@ function highlightActiveSection() {
     });
 }
 
-window.addEventListener('scroll', highlightActiveSection);
+// ============================================================
+// Scroll progress bar
+// ============================================================
+const scrollProgress = document.getElementById('scroll-progress');
 
-// Navbar background on scroll
-const navbar = document.querySelector('.navbar');
-
-function updateNavbarBackground() {
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(45, 125, 50, 0.1)';
-    } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = 'none';
+function updateScrollProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    if (scrollProgress) {
+        scrollProgress.style.width = `${progress}%`;
     }
 }
 
-window.addEventListener('scroll', updateNavbarBackground);
+// ============================================================
+// Back to top button
+// ============================================================
+const backToTopButton = document.getElementById('back-to-top');
 
-// Typing animation for hero title
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
+function updateBackToTopVisibility() {
+    if (backToTopButton) {
+        backToTopButton.classList.toggle('visible', window.scrollY > 400);
     }
-    
-    type();
 }
 
-// Initialize typing animation when page loads
-window.addEventListener('load', () => {
-    const heroTitle = document.querySelector('.hero-title');
-    const originalText = heroTitle.innerHTML;
-    
-    // Add a slight delay before starting the animation
-    setTimeout(() => {
-        typeWriter(heroTitle, originalText, 50);
-    }, 500);
+if (backToTopButton) {
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ============================================================
+// Theme toggle (light / dark) — desktop + mobile buttons stay in sync
+// ============================================================
+const themeToggles = [
+    document.getElementById('theme-toggle-desktop'),
+    document.getElementById('theme-toggle-mobile')
+].filter(Boolean);
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    themeToggles.forEach(btn => {
+        const icon = btn.querySelector('i');
+        if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+    if (window.neuralBackground) {
+        window.neuralBackground.refreshTheme();
+    }
+}
+
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+applyTheme(savedTheme);
+
+themeToggles.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+        localStorage.setItem('theme', nextTheme);
+    });
 });
 
-// Scroll animations for sections
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// ============================================================
+// Reveal-on-scroll for content blocks
+// ============================================================
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
 
-const observer = new IntersectionObserver((entries) => {
+const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            revealObserver.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Apply fade-in animation to elements
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.skill-category, .project-card, .about-content, .contact-content');
-    
+    const animatedElements = document.querySelectorAll(
+        '.timeline-item, .research-card, .project-card, .compact-list li'
+    );
+
     animatedElements.forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        revealObserver.observe(el);
     });
 });
 
-// Counter animation for stats
-function animateCounter(element, target, duration = 2000) {
+// ============================================================
+// Counter animation for the sidebar stats
+// ============================================================
+function animateCounter(element, target, suffix, duration = 1200) {
     let start = 0;
     const increment = target / (duration / 16);
-    
+
     function updateCounter() {
         start += increment;
         if (start < target) {
-            element.textContent = Math.floor(start) + '+';
+            element.textContent = Math.floor(start) + suffix;
             requestAnimationFrame(updateCounter);
         } else {
-            element.textContent = target + '+';
+            element.textContent = target + suffix;
         }
     }
-    
+
     updateCounter();
 }
 
-// Initialize counter animation when stats come into view
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const statNumbers = entry.target.querySelectorAll('.stat-number');
-            statNumbers.forEach(stat => {
-                const target = parseInt(stat.textContent);
-                animateCounter(stat, target);
+            entry.target.querySelectorAll('.side-stat-number').forEach(stat => {
+                const raw = stat.textContent.trim();
+                const suffix = raw.endsWith('+') ? '+' : '';
+                const target = parseInt(raw, 10);
+                if (!Number.isNaN(target)) {
+                    animateCounter(stat, target, suffix);
+                }
             });
             statsObserver.unobserve(entry.target);
         }
     });
 }, { threshold: 0.5 });
 
-const aboutStats = document.querySelector('.about-stats');
-if (aboutStats) {
-    statsObserver.observe(aboutStats);
+const sideStats = document.querySelector('.side-stats');
+if (sideStats) {
+    statsObserver.observe(sideStats);
 }
 
+// ============================================================
 // Contact form handling
+// ============================================================
 const contactForm = document.getElementById('contact-form');
 
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const subject = formData.get('subject');
-    const message = formData.get('message');
-    
-    // Basic validation
-    if (!name || !email || !subject || !message) {
-        showNotification('Please fill in all fields', 'error');
-        return;
-    }
-    
-    if (!isValidEmail(email)) {
-        showNotification('Please enter a valid email address', 'error');
-        return;
-    }
-    
-    // Simulate form submission
-    showNotification('Message sent successfully! I will get back to you soon.', 'success');
-    contactForm.reset();
-});
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
 
-// Email validation
+        const formData = new FormData(contactForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const subject = formData.get('subject');
+        const message = formData.get('message');
+
+        if (!name || !email || !subject || !message) {
+            showNotification('Please fill in all fields', 'error');
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            showNotification('Please enter a valid email address', 'error');
+            return;
+        }
+
+        showNotification('Message sent successfully! I will get back to you soon.', 'success');
+        contactForm.reset();
+    });
+}
+
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Notification system
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
-    
-    // Style the notification
+
     notification.style.cssText = `
         position: fixed;
         top: 20px;
@@ -211,13 +356,12 @@ function showNotification(message, type = 'info') {
         color: white;
         font-weight: 500;
         z-index: 10000;
-        transform: translateX(100%);
+        transform: translateX(120%);
         transition: transform 0.3s ease;
         max-width: 300px;
         word-wrap: break-word;
     `;
-    
-    // Set background color based on type
+
     switch (type) {
         case 'success':
             notification.style.background = '#10b981';
@@ -226,87 +370,57 @@ function showNotification(message, type = 'info') {
             notification.style.background = '#ef4444';
             break;
         default:
-            notification.style.background = '#6366f1';
+            notification.style.background = '#6d5ffb';
     }
-    
+
     document.body.appendChild(notification);
-    
-    // Animate in
+
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
-    
-    // Remove after 5 seconds
+
     setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
+        notification.style.transform = 'translateX(120%)';
         setTimeout(() => {
             document.body.removeChild(notification);
         }, 300);
     }, 5000);
 }
 
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    const heroContent = document.querySelector('.hero-content');
-    
-    if (hero && heroContent) {
-        const rate = scrolled * -0.5;
-        heroContent.style.transform = `translateY(${rate}px)`;
-    }
-});
-
-// Skill items hover effect
-document.querySelectorAll('.skill-item').forEach(item => {
-    item.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.05) translateY(-5px)';
-        this.style.boxShadow = '0 10px 25px rgba(45, 125, 50, 0.2)';
-    });
-    
-    item.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1) translateY(0)';
-        this.style.boxShadow = 'none';
-    });
-});
-
+// ============================================================
 // Project cards 3D tilt effect
+// ============================================================
 document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', function(e) {
+    card.addEventListener('mousemove', function (e) {
         const rect = this.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
+
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-        
-        this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+
+        const rotateX = (y - centerY) / 18;
+        const rotateY = (centerX - x) / 18;
+
+        this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
     });
-    
-    card.addEventListener('mouseleave', function() {
+
+    card.addEventListener('mouseleave', function () {
         this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
     });
 });
 
-// Dark mode toggle (bonus feature)
-function toggleDarkMode() {
-    document.body.classList.toggle('light-mode');
-    const isDarkMode = !document.body.classList.contains('light-mode');
-    localStorage.setItem('darkMode', isDarkMode);
-}
-
-// Load dark mode preference
-document.addEventListener('DOMContentLoaded', () => {
-    const isDarkMode = localStorage.getItem('darkMode') !== 'false';
-    if (!isDarkMode) {
-        document.body.classList.add('light-mode');
-    }
+// ============================================================
+// Footer copyright year (sidebar + main footer)
+// ============================================================
+['footer-year', 'footer-year-main'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = new Date().getFullYear();
 });
 
-// Performance optimization: Throttle scroll events
+// ============================================================
+// Throttled scroll handling
+// ============================================================
 function throttle(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -319,24 +433,16 @@ function throttle(func, wait) {
     };
 }
 
-// Apply throttling to scroll events
 const throttledScroll = throttle(() => {
     highlightActiveSection();
-    updateNavbarBackground();
+    updateScrollProgress();
+    updateBackToTopVisibility();
 }, 10);
 
 window.addEventListener('scroll', throttledScroll);
 
-// Preloader (optional)
-window.addEventListener('load', () => {
-    const preloader = document.querySelector('.preloader');
-    if (preloader) {
-        preloader.style.opacity = '0';
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 500);
-    }
-});
+// Set initial scroll-dependent state on load
+throttledScroll();
 
 // Console message for developers
 console.log(`
@@ -346,22 +452,3 @@ console.log(`
 
 Built with ❤️ using HTML, CSS & JavaScript
 `);
-
-// Footer copyright year
-const footerYear = document.getElementById('footer-year');
-if (footerYear) {
-    footerYear.textContent = new Date().getFullYear();
-}
-
-// Service Worker registration (for PWA features)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('SW registered: ', registration);
-            })
-            .catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
-    });
-}

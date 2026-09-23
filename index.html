@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Md. Saharan Evan - Data Analyst | AI/ML Research Engineer | PhD Applicant
+      Md. Saharan Evan - Data Analyst | AI/ML Research Engineer
     </title>
     <meta
       name="description"
-      content="Md. Saharan Evan - Data Analyst and AI/ML Research Engineer, Computer Science graduate and PhD applicant specializing in Computer Vision, Machine Learning, Reinforcement Learning, and Big Data Analysis."
+      content="Md. Saharan Evan - Data Analyst and AI/ML Research Engineer, Computer Science graduate specializing in Computer Vision, Machine Learning, Reinforcement Learning, and Big Data Analysis."
     />
     <meta
       name="keywords"
@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link
@@ -27,1118 +27,516 @@
     />
   </head>
   <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <div class="nav-logo">
-          <h3>Md Saharan Evan</h3>
-        </div>
-        <div class="nav-menu" id="nav-menu">
-          <a href="#home" class="nav-link">Home</a>
-          <a href="#about" class="nav-link">About</a>
-          <a href="#education" class="nav-link">Education</a>
-          <a href="#experience" class="nav-link">Experience</a>
-          <a href="#research" class="nav-link">Research</a>
-          <a href="#skills" class="nav-link">Skills</a>
-          <a href="#projects" class="nav-link">Projects</a>
-          <a href="#achievements" class="nav-link">Achievements</a>
-          <a href="#contact" class="nav-link">Contact</a>
-        </div>
-        <div class="nav-toggle" id="nav-toggle">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </div>
-      </div>
-    </nav>
+    <canvas id="neural-canvas" class="neural-canvas" aria-hidden="true"></canvas>
+    <div class="scroll-progress" id="scroll-progress"></div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <h1 class="hero-title">Hello, I'm Md. Saharan Evan</h1>
-          <p class="hero-description">
-            Data Analyst | Computer Science Graduate | PhD Applicant<br />
-            My research interests are in Computer Vision, Machine Learning,
-            Reinforcement Learning, and Big Data Analysis. I've worked with RAG
-            systems, Multi-Agent systems, LLMs, and tabular ML projects, and
-            I'm eager to explore diverse research fields building on a strong
-            foundation in computer science and engineering.
+    <!-- Mobile top bar -->
+    <div class="mobile-bar">
+      <span class="mobile-bar-name">Md Saharan Evan</span>
+      <div class="mobile-bar-actions">
+        <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <button class="sidebar-close" id="sidebar-close" aria-label="Close menu">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="profile-block">
+          <img src="Profile.jpg" alt="Md. Saharan Evan" class="profile-image" />
+          <h1 class="profile-name">Md. Saharan Evan</h1>
+          <p class="profile-role">Data Analyst · AI/ML Research Engineer</p>
+
+          <div class="sidebar-cta">
+            <a href="#contact" class="btn btn-primary btn-sm nav-link">Contact Me</a>
+            <button class="theme-toggle" id="theme-toggle-desktop" aria-label="Toggle dark mode">
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
+        </div>
+
+        <ul class="contact-list">
+          <li>
+            <a href="mailto:mdsaharanevan20001@gmail.com">
+              <i class="fas fa-envelope"></i><span>mdsaharanevan20001@gmail.com</span>
+            </a>
+          </li>
+          <li>
+            <a href="tel:+8801511428250">
+              <i class="fas fa-phone"></i><span>+880 1511-428250</span>
+            </a>
+          </li>
+          <li>
+            <span><i class="fas fa-location-dot"></i><span>Dhaka, Bangladesh</span></span>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/md-saharan-evan-951b6023a/" target="_blank">
+              <i class="fab fa-linkedin"></i><span>md-saharan-evan</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/Md-Saharan-Evan" target="_blank">
+              <i class="fab fa-github"></i><span>Md-Saharan-Evan</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="side-stats">
+          <div class="side-stat"><span class="side-stat-number">4+</span><span class="side-stat-label">Yrs Exp</span></div>
+          <div class="side-stat"><span class="side-stat-number">9+</span><span class="side-stat-label">Projects</span></div>
+          <div class="side-stat"><span class="side-stat-number">1</span><span class="side-stat-label">IEEE Pub</span></div>
+        </div>
+
+        <nav class="side-nav">
+          <a href="#about" class="side-nav-link nav-link"><i class="fas fa-user"></i>About</a>
+          <a href="#experience" class="side-nav-link nav-link"><i class="fas fa-briefcase"></i>Experience</a>
+          <a href="#education" class="side-nav-link nav-link"><i class="fas fa-graduation-cap"></i>Education</a>
+          <a href="#research" class="side-nav-link nav-link"><i class="fas fa-flask"></i>Research</a>
+          <a href="#skills" class="side-nav-link nav-link"><i class="fas fa-code"></i>Skills</a>
+          <a href="#projects" class="side-nav-link nav-link"><i class="fas fa-diagram-project"></i>Projects</a>
+          <a href="#achievements" class="side-nav-link nav-link"><i class="fas fa-trophy"></i>Achievements</a>
+          <a href="#contact" class="side-nav-link nav-link"><i class="fas fa-paper-plane"></i>Contact</a>
+        </nav>
+
+        <p class="sidebar-footnote">&copy; <span id="footer-year"></span> Md Saharan Evan</p>
+      </aside>
+
+      <!-- Main content -->
+      <main class="content">
+        <!-- About -->
+        <section id="about" class="panel">
+          <div class="panel-header">
+            <span class="eyebrow">Who I Am</span>
+            <h2 class="panel-title">About Me</h2>
+          </div>
+
+          <p class="panel-lead">
+            Data Analyst at <strong>US Bangla Airlines</strong> and a Computer Science graduate from
+            BRAC University. My research spans Computer Vision, Machine Learning, Reinforcement Learning,
+            and Big Data Analysis — with hands-on experience in RAG systems, Multi-Agent systems, LLMs,
+            and tabular ML projects.
           </p>
-          <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary">View My Work</a>
-            <a href="#contact" class="btn btn-secondary">Contact Me</a>
-          </div>
-          <div class="social-links">
-            <a
-              href="https://www.linkedin.com/in/md-saharan-evan-951b6023a/"
-              target="_blank"
-              aria-label="LinkedIn"
-              ><i class="fab fa-linkedin-in"></i
-            ></a>
-            <a
-              href="https://github.com/Md-Saharan-Evan"
-              target="_blank"
-              aria-label="GitHub"
-              ><i class="fab fa-github"></i
-            ></a>
-            <a href="mailto:mdsaharanevan20001@gmail.com" aria-label="Email"
-              ><i class="fas fa-envelope"></i
-            ></a>
-            <a href="tel:+8801511428250" aria-label="Phone"
-              ><i class="fas fa-phone"></i
-            ></a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <img src="Profile.jpg" alt="Md. Saharan Evan - Data Analyst & AI/ML Research Engineer" class="profile-image">
-        </div>
-      </div>
-    </section>
 
-    <!-- Education Section -->
-    <section id="education" class="education">
-      <div class="container">
-        <h2 class="section-title">Education</h2>
-        <div class="education-timeline">
-          <div class="education-item">
-            <div class="education-date">
-              <span>Sep 2020 – Jan 2025</span>
-            </div>
-            <div class="education-content">
-              <h3>BSc. in Computer Science and Engineering</h3>
-              <h4>BRAC University, Middle Badda, Dhaka</h4>
-              <p>
-                Completed comprehensive Computer Science and Engineering degree
-                with focus on:
-              </p>
+          <div class="tag-row">
+            <span class="pill"><i class="fas fa-eye"></i>Computer Vision</span>
+            <span class="pill"><i class="fas fa-brain"></i>Machine Learning</span>
+            <span class="pill"><i class="fas fa-robot"></i>Reinforcement Learning</span>
+            <span class="pill"><i class="fas fa-chart-line"></i>Big Data Analysis</span>
+          </div>
+
+          <div class="about-grid">
+            <div class="quick-fact"><i class="fas fa-graduation-cap"></i><span>BSc Computer Science, BRAC University</span></div>
+            <div class="quick-fact"><i class="fas fa-briefcase"></i><span>Data Analyst @ US Bangla Airlines</span></div>
+            <div class="quick-fact"><i class="fas fa-handshake"></i><span>Open to research collaborations</span></div>
+          </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="panel">
+          <div class="panel-header">
+            <span class="eyebrow">Career Journey</span>
+            <h2 class="panel-title">Professional Experience</h2>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-row">
+                <div>
+                  <h3>Data Analyst</h3>
+                  <h4>US Bangla Airlines <span class="dot">·</span> Baridhara, Dhaka</h4>
+                </div>
+                <span class="date-badge">Sep 2025 – Present</span>
+              </div>
               <ul>
-                <li>Computer Vision and Machine Learning</li>
-                <li>Reinforcement Learning and AI Systems</li>
-                <li>Software Engineering and Development</li>
-                <li>Data Structures and Algorithms</li>
-                <li>Database Management Systems</li>
-                <li>Multi-Agent Systems and AI Research</li>
+                <li>Built and maintained ETL pipelines consolidating passenger service system data for reporting</li>
+                <li>Developed pricing forecasting models to support revenue and route pricing decisions</li>
+                <li>Analyzed sales and flight operations data to identify trends and cost-reduction opportunities</li>
+                <li>Designed statistical/ML models supporting data-driven decisions across operations and finance</li>
               </ul>
-              <div class="gpa">
-                <span><strong>CGPA:</strong> 3.57/4.00</span>
+              <div class="tag-row compact">
+                <span class="tech">Python</span><span class="tech">SQL</span><span class="tech">ETL</span><span class="tech">Forecasting</span>
               </div>
             </div>
-          </div>
 
-          <div class="education-item">
-            <div class="education-date">
-              <span>July 2017 – May 2019</span>
-            </div>
-            <div class="education-content">
-              <h3>Higher Secondary Certificate (HSC)</h3>
-              <h4>Milestone College, Uttara, Dhaka</h4>
-              <p>
-                Completed higher secondary education in Science Group with
-                excellent academic performance:
-              </p>
+            <div class="timeline-item">
+              <div class="timeline-row">
+                <div>
+                  <h3>AI/ML Research Engineer <span class="job-type">Internship</span></h3>
+                  <h4>Teton Bangladesh <span class="dot">·</span> Badda, Dhaka</h4>
+                </div>
+                <span class="date-badge">Dec 2024 – May 2025</span>
+              </div>
               <ul>
-                <li>Mathematics and Advanced Mathematics</li>
-                <li>Physics and Applied Physics</li>
-                <li>Chemistry and Organic Chemistry</li>
-                <li>Information and Communication Technology</li>
-                <li>Biology and Life Sciences</li>
+                <li>Developed and optimized AI/ML models for analyzing high-dimensional datasets</li>
+                <li>Addressed scalability, model efficiency, and computational challenges</li>
+                <li>Innovated AI architectures to improve accuracy and interpretability</li>
               </ul>
-              <div class="gpa">
-                <span><strong>GPA:</strong> 5.00/5.00</span>
+              <div class="tag-row compact">
+                <span class="tech">Python</span><span class="tech">TensorFlow</span><span class="tech">PyTorch</span>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-      <div class="container">
-        <h2 class="section-title">Professional Experience</h2>
-        <div class="experience-timeline">
-          <div class="experience-item">
-            <div class="experience-date">
-              <span>Sep 2025 – Present</span>
-            </div>
-            <div class="experience-content">
-              <h3>Data Analyst</h3>
-              <h4>US Bangla Airlines, Baridhara, Dhaka-1212</h4>
+            <div class="timeline-item">
+              <div class="timeline-row">
+                <div>
+                  <h3>Assistant Instructor <span class="job-type">Teaching</span></h3>
+                  <h4>Glorious Professional Academy <span class="dot">·</span> Greenroad, Dhaka</h4>
+                </div>
+                <span class="date-badge">Jan 2020 – Dec 2020</span>
+              </div>
               <ul>
-                <li>
-                  Built and maintained ETL pipelines to consolidate passenger
-                  service system data for downstream analysis and reporting
-                </li>
-                <li>
-                  Developed pricing forecasting models to support revenue and
-                  route pricing decisions
-                </li>
-                <li>
-                  Analyzed sales outcomes and flight operations data to
-                  identify trends, inefficiencies, and cost-reduction
-                  opportunities
-                </li>
-                <li>
-                  Designed statistical/ML models to support data-driven
-                  decision-making across operational and financial functions
-                </li>
-                <li>
-                  Collected, cleaned, and analyzed operational, financial, and
-                  customer data to inform business strategy
-                </li>
+                <li>Taught Mathematics and Physics; prepared question papers on logical reasoning</li>
+                <li>Developed educational materials and mentored students in problem-solving skills</li>
               </ul>
-              <div class="tech-stack">
-                <span class="tech">Python</span>
-                <span class="tech">SQL</span>
-                <span class="tech">ETL</span>
-                <span class="tech">Forecasting</span>
-                <span class="tech">Machine Learning</span>
+              <div class="tag-row compact">
+                <span class="tech">Teaching</span><span class="tech">Mathematics</span><span class="tech">Physics</span>
               </div>
             </div>
           </div>
+        </section>
 
-          <div class="experience-item">
-            <div class="experience-date">
-              <span>Dec 2024 – May 2025</span>
+        <!-- Education -->
+        <section id="education" class="panel">
+          <div class="panel-header">
+            <span class="eyebrow">Academic Path</span>
+            <h2 class="panel-title">Education</h2>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-row">
+                <div>
+                  <h3>BSc. in Computer Science and Engineering</h3>
+                  <h4>BRAC University <span class="dot">·</span> Middle Badda, Dhaka</h4>
+                </div>
+                <span class="date-badge">Sep 2020 – Jan 2025</span>
+              </div>
+              <p class="timeline-note">
+                Focus: Computer Vision &amp; ML, Reinforcement Learning, Software Engineering,
+                Data Structures &amp; Algorithms, Database Management, Multi-Agent Systems.
+              </p>
+              <span class="gpa">CGPA 3.57 / 4.00</span>
             </div>
-            <div class="experience-content">
-              <h3>AI/ML Research Engineer</h3>
-              <h4>
-                Teton Bangladesh, Badda, Dhaka-1212
-                <span class="job-type">Internship</span>
-              </h4>
-              <ul>
+
+            <div class="timeline-item">
+              <div class="timeline-row">
+                <div>
+                  <h3>Higher Secondary Certificate (HSC)</h3>
+                  <h4>Milestone College <span class="dot">·</span> Uttara, Dhaka</h4>
+                </div>
+                <span class="date-badge">Jul 2017 – May 2019</span>
+              </div>
+              <p class="timeline-note">Science Group — Mathematics, Physics, Chemistry, ICT, Biology.</p>
+              <span class="gpa">GPA 5.00 / 5.00</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Research -->
+        <section id="research" class="panel">
+          <div class="panel-header">
+            <span class="eyebrow">Deep Dives</span>
+            <h2 class="panel-title">Research &amp; Publications</h2>
+          </div>
+
+          <div class="research-grid">
+            <div class="research-card">
+              <div class="research-card-head">
+                <span class="date-badge">Mar 2024</span>
+                <span class="research-type">Undergraduate Thesis</span>
+              </div>
+              <h3>Safe RL for Connected &amp; Autonomous Vehicle Charging Infrastructure</h3>
+              <span class="thesis-score"><i class="fas fa-star"></i>Thesis Score 97/100</span>
+              <p>
+                End-to-end intelligent system for optimal EV charging recommendations. Combined multi-agent
+                Safe Reinforcement Learning with deep neural networks and linear models to improve
+                prediction accuracy while respecting safety constraints under crowded charging demand.
+              </p>
+              <div class="tag-row compact">
+                <span class="tech">Safe RL</span><span class="tech">Multi-Agent Systems</span><span class="tech">DNNs</span>
+              </div>
+            </div>
+
+            <div class="research-card">
+              <div class="research-card-head">
+                <span class="date-badge">Jan 2023 – Jan 2024</span>
+                <span class="research-type">IEEE I2CT 2024</span>
+              </div>
+              <h3>Evaluating Online Sexism Detection</h3>
+              <p>
+                Explored NLP techniques to detect online sexism using the EDOS dataset. Implemented in
+                Python with NLTK and Keras, comparing ML models on identifying sexist language across
+                contexts. Published in IEEE 9th I2CT 2024.
+              </p>
+              <div class="tag-row compact">
+                <span class="tech">NLP</span><span class="tech">NLTK</span><span class="tech">Keras</span><span class="tech">IEEE Publication</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="panel">
+          <div class="panel-header">
+            <span class="eyebrow">Toolbox</span>
+            <h2 class="panel-title">Skills &amp; Technologies</h2>
+          </div>
+
+          <div class="skills-list">
+            <div class="skill-row">
+              <span class="skill-label">Languages</span>
+              <div class="tag-row">
+                <span class="pill sm"><i class="fab fa-python"></i>Python</span>
+                <span class="pill sm"><i class="fab fa-cuttlefish"></i>C/C++</span>
+                <span class="pill sm"><i class="fab fa-java"></i>Java</span>
+                <span class="pill sm"><i class="fab fa-js-square"></i>JavaScript</span>
+                <span class="pill sm"><i class="fas fa-code"></i>Assembly</span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <span class="skill-label">AI &amp; ML</span>
+              <div class="tag-row">
+                <span class="pill sm"><i class="fas fa-brain"></i>TensorFlow</span>
+                <span class="pill sm"><i class="fas fa-fire"></i>PyTorch</span>
+                <span class="pill sm"><i class="fas fa-robot"></i>Keras</span>
+                <span class="pill sm"><i class="fas fa-chart-line"></i>Scikit-learn</span>
+                <span class="pill sm"><i class="fas fa-language"></i>Hugging Face</span>
+                <span class="pill sm"><i class="fas fa-link"></i>LangChain</span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <span class="skill-label">Data &amp; Databases</span>
+              <div class="tag-row">
+                <span class="pill sm"><i class="fas fa-database"></i>SQL</span>
+                <span class="pill sm"><i class="fas fa-cloud"></i>BigQuery</span>
+                <span class="pill sm"><i class="fas fa-leaf"></i>MongoDB</span>
+                <span class="pill sm"><i class="fas fa-table"></i>Pandas</span>
+                <span class="pill sm"><i class="fas fa-stream"></i>Kafka</span>
+                <span class="pill sm"><i class="fas fa-bolt"></i>Spark</span>
+                <span class="pill sm"><i class="fas fa-project-diagram"></i>Airflow</span>
+                <span class="pill sm"><i class="fas fa-cubes"></i>Databricks</span>
+                <span class="pill sm"><i class="fas fa-chart-bar"></i>Tableau</span>
+                <span class="pill sm"><i class="fas fa-chart-pie"></i>PowerBI</span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <span class="skill-label">Backend &amp; Frontend</span>
+              <div class="tag-row">
+                <span class="pill sm"><i class="fab fa-python"></i>Django</span>
+                <span class="pill sm"><i class="fas fa-flask"></i>Flask</span>
+                <span class="pill sm"><i class="fas fa-exchange-alt"></i>REST APIs</span>
+                <span class="pill sm"><i class="fab fa-html5"></i>HTML5</span>
+                <span class="pill sm"><i class="fab fa-css3-alt"></i>CSS3</span>
+                <span class="pill sm"><i class="fab fa-bootstrap"></i>Bootstrap</span>
+              </div>
+            </div>
+
+            <div class="skill-row">
+              <span class="skill-label">Tools &amp; Libraries</span>
+              <div class="tag-row">
+                <span class="pill sm"><i class="fas fa-calculator"></i>NumPy</span>
+                <span class="pill sm"><i class="fas fa-eye"></i>OpenCV</span>
+                <span class="pill sm"><i class="fab fa-github"></i>GitHub</span>
+                <span class="pill sm"><i class="fab fa-git-alt"></i>Git</span>
+                <span class="pill sm"><i class="fab fa-docker"></i>Docker</span>
+                <span class="pill sm"><i class="fab fa-aws"></i>AWS</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="panel">
+          <div class="panel-header">
+            <span class="eyebrow">Selected Work</span>
+            <h2 class="panel-title">Featured Projects</h2>
+          </div>
+
+          <div class="projects-grid">
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <h3>Foundation Models for Disaster Damage Assessment</h3>
+                <p>Benchmarked self-supervised DINOv2 ViT-S/14 vs. supervised ResNet-50 for hurricane damage classification; 0.99 macro-F1 with label-efficiency study.</p>
+                <div class="tag-row compact"><span class="tech-tag">DINOv2</span><span class="tech-tag">Computer Vision</span></div>
+                <a href="https://github.com/Md-Saharan-Evan/self-supervised-vision-foundation-model" class="project-link" target="_blank"><i class="fab fa-github"></i>Source Code</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <h3>MedSafe: Neurosymbolic Medication Safety Checker</h3>
+                <p>Neurosymbolic prototype pairing LLM extraction with a deterministic rule engine to catch dangerous drug interactions from clinical notes.</p>
+                <div class="tag-row compact"><span class="tech-tag">LLM</span><span class="tech-tag">Neurosymbolic AI</span></div>
+                <a href="https://github.com/Md-Saharan-Evan/MedSafe" class="project-link" target="_blank"><i class="fab fa-github"></i>Source Code</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <h3>Autonomous Face Recognition &amp; Verification</h3>
+                <p>Deep learning face recognition from low-resolution CCTV footage, optimized for real-time, low-compute deployment via a web app.</p>
+                <div class="tag-row compact"><span class="tech-tag">Deep Learning</span><span class="tech-tag">OpenCV</span></div>
+                <a href="https://github.com/Md-Saharan-Evan/Autonomous-Face-Recognition-Model" class="project-link" target="_blank"><i class="fab fa-github"></i>Source Code</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <h3>Agentic AI for Conversational Data Analysis</h3>
+                <p>AI-powered conversational interface analyzing CSV datasets — summaries, correlations, and visualizations on demand.</p>
+                <div class="tag-row compact"><span class="tech-tag">AI Agents</span><span class="tech-tag">Pandas</span></div>
+                <a href="https://github.com/Md-Saharan-Evan/Data-analyst" class="project-link" target="_blank"><i class="fab fa-github"></i>Source Code</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <h3>NID Detection &amp; Text Extraction Pipeline</h3>
+                <p>Detects and extracts structured fields from National ID images using object detection and OCR, delivering JSON outputs.</p>
+                <div class="tag-row compact"><span class="tech-tag">Object Detection</span><span class="tech-tag">OCR</span></div>
+                <a href="https://github.com/Md-Saharan-Evan/NID-detection-from-Image-and-text-extraction" class="project-link" target="_blank"><i class="fab fa-github"></i>Source Code</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <h3>Signboard Detection from Roadside Images</h3>
+                <p>Object detection model identifying roadside signboards using CNN and YOLOv5 on a custom-labeled dataset.</p>
+                <div class="tag-row compact"><span class="tech-tag">YOLOv5</span><span class="tech-tag">CNN</span></div>
+                <a href="https://github.com/Md-Saharan-Evan/Signboard-detection-using-Yolov5" class="project-link" target="_blank"><i class="fab fa-github"></i>Source Code</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <h3>Bangla RAG QA Chatbot</h3>
+                <p>Retrieval-augmented generation chatbot answering questions from Bangla textbooks via extraction and summarization.</p>
+                <div class="tag-row compact"><span class="tech-tag">RAG</span><span class="tech-tag">LangChain</span></div>
+                <a href="https://github.com/Md-Saharan-Evan/Bangla_QA_Chatbot" class="project-link" target="_blank"><i class="fab fa-github"></i>Source Code</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <h3>Error Detection in Bengali Language</h3>
+                <p>Supervised ML system for grammatical error detection in Bengali text, trained on Kaggle datasets.</p>
+                <div class="tag-row compact"><span class="tech-tag">NLP</span><span class="tech-tag">ML</span></div>
+                <a href="https://github.com/md-saharan-evan/bengali-error-detection" class="project-link" target="_blank"><i class="fab fa-github"></i>Source Code</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-image"></div>
+              <div class="project-content">
+                <h3>House Price Prediction</h3>
+                <p>Predictive models estimating house prices with strong accuracy using ensemble learning methods.</p>
+                <div class="tag-row compact"><span class="tech-tag">Ensemble Learning</span><span class="tech-tag">Regression</span></div>
+                <a href="https://github.com/Md-Saharan-Evan/Bengalore-House-price-prediction" class="project-link" target="_blank"><i class="fab fa-github"></i>Source Code</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Achievements -->
+        <section id="achievements" class="panel">
+          <div class="panel-header">
+            <span class="eyebrow">Recognition</span>
+            <h2 class="panel-title">Achievements &amp; Certifications</h2>
+          </div>
+
+          <div class="achievements-grid">
+            <div class="achievement-col">
+              <h3><i class="fas fa-trophy"></i>Achievements</h3>
+              <ul class="compact-list">
                 <li>
-                  Developed and optimized AI/ML models for analyzing
-                  high-dimensional datasets
-                </li>
-                <li>
-                  Addressed scalability, model efficiency, and computational
-                  challenges
-                </li>
-                <li>
-                  Innovated AI architectures to improve accuracy and
-                  interpretability
-                </li>
-              </ul>
-              <div class="tech-stack">
-                <span class="tech">Python</span>
-                <span class="tech">TensorFlow</span>
-                <span class="tech">PyTorch</span>
-                <span class="tech">Machine Learning</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="experience-item">
-            <div class="experience-date">
-              <span>Jan 2020 – Dec 2020</span>
-            </div>
-            <div class="experience-content">
-              <h3>Assistant Instructor</h3>
-              <h4>
-                Glorious Professional Academy, Greenroad, Dhaka
-                <span class="job-type">Teaching</span>
-              </h4>
-              <ul>
-                <li>Taught classes on Mathematics and Physics to students</li>
-                <li>
-                  Prepared comprehensive question papers on logical reasoning
-                </li>
-                <li>
-                  Developed educational materials and assessment frameworks
-                </li>
-                <li>
-                  Mentored students in academic and problem-solving skills
-                </li>
-              </ul>
-              <div class="tech-stack">
-                <span class="tech">Teaching</span>
-                <span class="tech">Mathematics</span>
-                <span class="tech">Physics</span>
-                <span class="tech">Curriculum Development</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Research & Publications Section -->
-    <section id="research" class="research">
-      <div class="container">
-        <h2 class="section-title">Research & Publications</h2>
-        <div class="research-content">
-          <div class="research-intro">
-            <p>
-              My research experiences span Computer Vision, Machine Learning,
-              Reinforcement Learning, and Big Data Analysis. I have worked
-              extensively with RAG systems, Multi-Agent systems, LLMs, and
-              tabular ML projects, contributing to both academic research and
-              practical applications.
-            </p>
-          </div>
-
-          <div class="research-timeline">
-            <div class="research-item">
-              <div class="research-date">
-                <span>Mar 2024</span>
-              </div>
-              <div class="research-content-item">
-                <h3>
-                  Safe RL based System for Connected and Autonomous Vehicle
-                  Charging Infrastructure
-                </h3>
-                <p class="research-type">Undergraduate Thesis</p>
-                <div class="thesis-score">
-                  <i class="fas fa-star"></i>
-                  <span>Thesis Score: 97/100</span>
-                </div>
-                <p class="research-description">
-                  This undergraduate thesis focused on designing an end-to-end
-                  intelligent system that provides optimal charging
-                  recommendations for connected and autonomous vehicles.
-                  Leveraging multi-agent system, the research incorporated Safe
-                  Reinforcement Learning to ensure decision-making within
-                  predefined safety constraints, combined with deep neural
-                  networks and multiple linear models to improve prediction
-                  accuracy. The system demonstrated significant improvements
-                  over baseline approaches, particularly in managing crowded
-                  charging requests while maintaining efficiency and safety.
-                </p>
-                <div class="research-tags">
-                  <span class="research-tag">Safe Reinforcement Learning</span>
-                  <span class="research-tag">Multi-Agent Systems</span>
-                  <span class="research-tag">Deep Neural Networks</span>
-                  <span class="research-tag">Autonomous Vehicles</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="research-item">
-              <div class="research-date">
-                <span>Jan 2023 – Jan 2024</span>
-              </div>
-              <div class="research-content-item">
-                <h3>Evaluating Online Sexism Detection</h3>
-                <p class="research-type">Published Research - IEEE I2CT 2024</p>
-                <p class="research-description">
-                  This research explored Natural Language Processing techniques
-                  to detect online sexism using the EDOS dataset. Implemented in
-                  Python with NLTK and Keras, the study conducted a comparative
-                  analysis of various machine learning models, evaluating their
-                  effectiveness in identifying sexist language across different
-                  contexts. The findings contributed to understanding model
-                  strengths and weaknesses in handling nuanced online discourse,
-                  and the work was published in the 2024 IEEE 9th International
-                  Conference for Convergence in Technology (I2CT).
-                </p>
-                <div class="research-tags">
-                  <span class="research-tag">Natural Language Processing</span>
-                  <span class="research-tag">Machine Learning</span>
-                  <span class="research-tag">NLTK</span>
-                  <span class="research-tag">Keras</span>
-                  <span class="research-tag">IEEE Publication</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="research-stats">
-            <div class="research-stat">
-              <span class="stat-number">2</span>
-              <span class="stat-label">Research Projects</span>
-            </div>
-            <div class="research-stat">
-              <span class="stat-number">1</span>
-              <span class="stat-label">IEEE Publication</span>
-            </div>
-            <div class="research-stat">
-              <span class="stat-number">4</span>
-              <span class="stat-label">Research Areas</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-      <div class="container">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-          <div class="about-text">
-            <div class="about-intro">
-              <h3>Data Analyst & AI/ML Research Engineer</h3>
-              <p>
-                I am Md. Saharan Evan, a Data Analyst at US Bangla Airlines and
-                a Computer Science graduate from BRAC University, currently
-                applying to PhD programs. My research experiences span
-                Computer Vision, Machine Learning, Reinforcement Learning, and
-                Big Data Analysis, with hands-on expertise in RAG systems,
-                Multi-Agent systems, LLMs, and tabular ML projects.
-              </p>
-            </div>
-
-            <div class="about-details">
-              <h4>Research & Expertise</h4>
-              <p>
-                I am eager to explore diverse research fields, leveraging my
-                strong foundation in computer science and engineering. My
-                academic journey combined with professional experience has
-                equipped me with deep knowledge in cutting-edge AI and data
-                technologies:
-              </p>
-
-              <div class="interests-grid">
-                <div class="interest-item">
-                  <i class="fas fa-eye"></i>
-                  <h5>Computer Vision</h5>
-                  <p>
-                    Advanced image processing, object detection, and visual
-                    recognition systems
-                  </p>
-                </div>
-                <div class="interest-item">
-                  <i class="fas fa-brain"></i>
-                  <h5>Machine Learning</h5>
-                  <p>
-                    Deep learning, neural networks, and intelligent algorithm
-                    development
-                  </p>
-                </div>
-                <div class="interest-item">
-                  <i class="fas fa-robot"></i>
-                  <h5>Reinforcement Learning</h5>
-                  <p>
-                    Safe RL systems, multi-agent environments, and autonomous
-                    decision-making
-                  </p>
-                </div>
-                <div class="interest-item">
-                  <i class="fas fa-chart-line"></i>
-                  <h5>Big Data Analysis</h5>
-                  <p>
-                    ETL pipelines, forecasting models, and large-scale
-                    predictive analytics
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="about-stats">
-              <div class="stat">
-                <span class="stat-number">4+</span>
-                <span class="stat-label">Years Experience</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">20+</span>
-                <span class="stat-label">Technologies</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">9+</span>
-                <span class="stat-label">Projects</span>
-              </div>
-            </div>
-          </div>
-          <div class="about-image">
-            <div class="image-placeholder">
-              <i class="fas fa-user-graduate"></i>
-              <p>Computer Science Graduate</p>
-            </div>
-            <div class="quick-info">
-              <div class="info-item">
-                <i class="fas fa-graduation-cap"></i>
-                <span>BSc Computer Science</span>
-              </div>
-              <div class="info-item">
-                <i class="fas fa-briefcase"></i>
-                <span>Data Analyst @ US Bangla Airlines</span>
-              </div>
-              <div class="info-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Dhaka, Bangladesh</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-      <div class="container">
-        <h2 class="section-title">Skills & Technologies</h2>
-        <div class="skills-grid">
-          <div class="skill-category">
-            <h3>Programming Languages</h3>
-            <div class="skill-items">
-              <div class="skill-item">
-                <i class="fab fa-python"></i>
-                <span>Python</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-cuttlefish"></i>
-                <span>C/C++</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-java"></i>
-                <span>Java</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-js-square"></i>
-                <span>JavaScript</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-code"></i>
-                <span>Assembly</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>AI & Machine Learning</h3>
-            <div class="skill-items">
-              <div class="skill-item">
-                <i class="fas fa-brain"></i>
-                <span>TensorFlow</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-fire"></i>
-                <span>PyTorch</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-robot"></i>
-                <span>Keras</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-chart-line"></i>
-                <span>Scikit-learn</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-language"></i>
-                <span>Hugging Face</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-link"></i>
-                <span>LangChain</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>Data Analysis & Databases</h3>
-            <div class="skill-items">
-              <div class="skill-item">
-                <i class="fas fa-database"></i>
-                <span>SQL</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-cloud"></i>
-                <span>BigQuery</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-leaf"></i>
-                <span>MongoDB</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-table"></i>
-                <span>Pandas</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-stream"></i>
-                <span>Kafka</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-bolt"></i>
-                <span>Spark</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-project-diagram"></i>
-                <span>Airflow</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-cubes"></i>
-                <span>Databricks</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-chart-bar"></i>
-                <span>Tableau</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-chart-pie"></i>
-                <span>PowerBI</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>Backend & Frontend</h3>
-            <div class="skill-items">
-              <div class="skill-item">
-                <i class="fab fa-python"></i>
-                <span>Django</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-flask"></i>
-                <span>Flask</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-exchange-alt"></i>
-                <span>RESTful APIs</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-html5"></i>
-                <span>HTML5</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-css3-alt"></i>
-                <span>CSS3</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-bootstrap"></i>
-                <span>Bootstrap</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="skill-category">
-            <h3>Tools & Libraries</h3>
-            <div class="skill-items">
-              <div class="skill-item">
-                <i class="fas fa-calculator"></i>
-                <span>NumPy</span>
-              </div>
-              <div class="skill-item">
-                <i class="fas fa-eye"></i>
-                <span>OpenCV</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-github"></i>
-                <span>GitHub</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-git-alt"></i>
-                <span>Git</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-docker"></i>
-                <span>Docker</span>
-              </div>
-              <div class="skill-item">
-                <i class="fab fa-aws"></i>
-                <span>AWS</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-      <div class="container">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder">
-                <i class="fas fa-satellite"></i>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>Foundation Models for Post-Disaster Damage Assessment</h3>
-              <p>
-                Benchmarked a self-supervised vision foundation model (DINOv2
-                ViT-S/14) against a supervised ResNet-50 baseline for
-                classifying hurricane damage in satellite imagery, including a
-                label-efficiency study (10%, 25%, 100% of labels) and
-                attention-based interpretability. Best model reached 0.99
-                macro-F1 on held-out test data.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">Self-Supervised Learning</span>
-                <span class="tech-tag">DINOv2</span>
-                <span class="tech-tag">Computer Vision</span>
-                <span class="tech-tag">Interpretability</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://github.com/Md-Saharan-Evan/self-supervised-vision-foundation-model"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i>
-                  Source Code
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder">
-                <i class="fas fa-notes-medical"></i>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>MedSafe: Neurosymbolic Medication Safety Checker</h3>
-              <p>
-                Built a neurosymbolic AI prototype that pairs an LLM-based
-                neural extraction layer with a deterministic symbolic rule
-                engine to catch dangerous drug-drug interactions,
-                contraindications, and dosage violations from free-text
-                clinical notes. Designed for provable determinism and
-                auditability, validated with a unit test suite and a 50-run
-                reproducibility check.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">Neurosymbolic AI</span>
-                <span class="tech-tag">LLM</span>
-                <span class="tech-tag">Healthcare</span>
-                <span class="tech-tag">Rule Engine</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://github.com/Md-Saharan-Evan/MedSafe"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i>
-                  Source Code
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder">
-                <i class="fas fa-eye"></i>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>Autonomous Face Recognition & Verification System</h3>
-              <p>
-                Designed and implemented a deep learning system for face
-                recognition and verification from low-resolution CCTV footage,
-                optimized for real-time performance and low computational power.
-                Integrated the system with a web application for live
-                deployment.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">Deep Learning</span>
-                <span class="tech-tag">Computer Vision</span>
-                <span class="tech-tag">OpenCV</span>
-                <span class="tech-tag">Web Application</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://github.com/Md-Saharan-Evan/Autonomous-Face-Recognition-Model"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i>
-                  Source Code
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder">
-                <i class="fas fa-comments"></i>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>Agentic AI for Conversational Data Analysis</h3>
-              <p>
-                Created an AI-powered conversational interface to analyze CSV
-                datasets, generating summaries, correlations, and
-                visualizations interactively for enhanced data insights.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">AI Agents</span>
-                <span class="tech-tag">Data Analysis</span>
-                <span class="tech-tag">Pandas</span>
-                <span class="tech-tag">Visualization</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://github.com/Md-Saharan-Evan/Data-analyst"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i>
-                  Source Code
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder">
-                <i class="fas fa-id-card"></i>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>NID Detection & Text Extraction Pipeline</h3>
-              <p>
-                Built a pipeline to detect and extract structured information
-                from National ID images using object detection and OCR
-                techniques, delivering JSON outputs.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">Object Detection</span>
-                <span class="tech-tag">OCR</span>
-                <span class="tech-tag">Computer Vision</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://github.com/Md-Saharan-Evan/NID-detection-from-Image-and-text-extraction"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i>
-                  Source Code
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder">
-                <i class="fas fa-traffic-light"></i>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>Signboard Detection from Roadside Images</h3>
-              <p>
-                Developed an object detection model to identify roadside
-                signboards from images using CNN and YOLO architectures on a
-                custom-labeled dataset.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">YOLOv5</span>
-                <span class="tech-tag">CNN</span>
-                <span class="tech-tag">Object Detection</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://github.com/Md-Saharan-Evan/Signboard-detection-using-Yolov5"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i>
-                  Source Code
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder">
-                <i class="fas fa-comments"></i>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>Bangla RAG QA Chatbot</h3>
-              <p>
-                Built a retrieval-augmented generation chatbot to answer
-                questions from Bangla textbooks by extracting and summarizing
-                relevant content using advanced NLP techniques.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">RAG</span>
-                <span class="tech-tag">NLP</span>
-                <span class="tech-tag">LangChain</span>
-                <span class="tech-tag">Bangla Processing</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://github.com/Md-Saharan-Evan/Bangla_QA_Chatbot"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i>
-                  Source Code
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder">
-                <i class="fas fa-language"></i>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>Error Detection in Bengali Language</h3>
-              <p>
-                Designed a supervised machine learning system for
-                grammatical error detection in Bengali text, trained on
-                Kaggle datasets.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">NLP</span>
-                <span class="tech-tag">Machine Learning</span>
-                <span class="tech-tag">Bangla Processing</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://github.com/md-saharan-evan/bengali-error-detection"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i>
-                  Source Code
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="project-card">
-            <div class="project-image">
-              <div class="image-placeholder">
-                <i class="fas fa-home"></i>
-              </div>
-            </div>
-            <div class="project-content">
-              <h3>House Price Prediction</h3>
-              <p>
-                Developed predictive models for estimating house prices,
-                achieving strong accuracy using ensemble learning methods.
-              </p>
-              <div class="project-tech">
-                <span class="tech-tag">Ensemble Learning</span>
-                <span class="tech-tag">Regression</span>
-                <span class="tech-tag">Data Analysis</span>
-              </div>
-              <div class="project-links">
-                <a
-                  href="https://github.com/Md-Saharan-Evan/Bengalore-House-price-prediction"
-                  class="project-link"
-                  target="_blank"
-                >
-                  <i class="fab fa-github"></i>
-                  Source Code
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Achievements & Certifications Section -->
-    <section id="achievements" class="achievements">
-      <div class="container">
-        <h2 class="section-title">Achievements & Certifications</h2>
-        <div class="achievements-grid">
-          <div class="achievement-category">
-            <h3><i class="fas fa-trophy"></i> Achievements</h3>
-            <div class="achievement-list">
-              <div class="achievement-item">
-                <div class="achievement-icon">
                   <i class="fas fa-medal"></i>
-                </div>
-                <div class="achievement-content">
-                  <h4>Runner-up of TechSpectra 2.0</h4>
-                  <p>BRAC University - Dec 2023</p>
-                  <span class="achievement-detail"
-                    >Prompt Engineering using ChatGPT, Web Application</span
-                  >
-                </div>
-              </div>
-
-              <div class="achievement-item">
-                <div class="achievement-icon">
+                  <div><strong>Runner-up, TechSpectra 2.0</strong><span>BRAC University · Dec 2023 · Prompt Engineering with ChatGPT</span></div>
+                </li>
+                <li>
                   <i class="fas fa-code"></i>
-                </div>
-                <div class="achievement-content">
-                  <h4>100+ Problems Solved</h4>
-                  <p>LeetCode Platform</p>
-                  <span class="achievement-detail"
-                    >Algorithmic problem solving and data structures</span
-                  >
-                </div>
-              </div>
-
-              <div class="achievement-item">
-                <div class="achievement-icon">
+                  <div><strong>100+ Problems Solved</strong><span>LeetCode — algorithms &amp; data structures</span></div>
+                </li>
+                <li>
                   <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="achievement-content">
-                  <h4>50+ Problems Solved</h4>
-                  <p>Codeforces Platform</p>
-                  <span class="achievement-detail"
-                    >Competitive programming and algorithmic challenges</span
-                  >
-                </div>
-              </div>
+                  <div><strong>50+ Problems Solved</strong><span>Codeforces — competitive programming</span></div>
+                </li>
+              </ul>
             </div>
-          </div>
 
-          <div class="achievement-category">
-            <h3><i class="fas fa-certificate"></i> Certifications</h3>
-            <div class="achievement-list">
-              <div class="achievement-item">
-                <div class="achievement-icon">
+            <div class="achievement-col">
+              <h3><i class="fas fa-certificate"></i>Certifications</h3>
+              <ul class="compact-list">
+                <li>
                   <i class="fas fa-code-branch"></i>
-                </div>
-                <div class="achievement-content">
-                  <h4>Software Engineering Virtual Experience</h4>
-                  <p>JP Morgan Chase & Co. - Forage (2023)</p>
-                  <span class="achievement-detail"
-                    >Hands-on software development experience</span
-                  >
-                </div>
-              </div>
-
-              <div class="achievement-item">
-                <div class="achievement-icon">
+                  <div><strong>Software Engineering Virtual Experience</strong><span>JP Morgan Chase &amp; Co. – Forage (2023)</span></div>
+                </li>
+                <li>
                   <i class="fas fa-plane"></i>
-                </div>
-                <div class="achievement-content">
-                  <h4>Data Science Virtual Experience</h4>
-                  <p>British Airways (2023)</p>
-                  <span class="achievement-detail"
-                    >Data analysis and machine learning applications</span
-                  >
-                </div>
-              </div>
-
-              <div class="achievement-item">
-                <div class="achievement-icon">
+                  <div><strong>Data Science Virtual Experience</strong><span>British Airways (2023)</span></div>
+                </li>
+                <li>
                   <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div class="achievement-content">
-                  <h4>30+ Online Courses Completed</h4>
-                  <p>Coursera & DataCamp</p>
-                  <span class="achievement-detail"
-                    >Data Science, Machine Learning, and Data Engineering
-                    specializations</span
-                  >
-                </div>
-              </div>
+                  <div><strong>30+ Online Courses</strong><span>Coursera &amp; DataCamp — Data Science, ML, Data Engineering</span></div>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-content">
-          <div class="contact-info">
-            <h3>Let's Connect!</h3>
-            <p>
-              I'm always excited to discuss new opportunities in data
-              analytics and AI/ML research, collaborate on innovative
-              projects, or connect with fellow researchers and tech
-              enthusiasts. Whether you have a research collaboration idea,
-              want to discuss AI technologies, or explore potential
-              opportunities, feel free to reach out!
+        <!-- Contact -->
+        <section id="contact" class="panel">
+          <div class="panel-header">
+            <span class="eyebrow">Say Hello</span>
+            <h2 class="panel-title">Get In Touch</h2>
+          </div>
+
+          <div class="contact-grid">
+            <p class="panel-lead">
+              Excited to discuss opportunities in data analytics and AI/ML research, collaborate on
+              projects, or connect with fellow researchers. Reach out any time!
             </p>
-            <div class="contact-details">
-              <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>mdsaharanevan20001@gmail.com</span>
-              </div>
-              <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <span>+8801511428250</span>
-              </div>
-              <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Dhaka, Bangladesh</span>
-              </div>
-              <div class="contact-item">
-                <i class="fab fa-linkedin"></i>
-                <span>linkedin.com/in/md-saharan-evan-951b6023a</span>
-              </div>
-              <div class="contact-item">
-                <i class="fab fa-github"></i>
-                <span>github.com/Md-Saharan-Evan</span>
-              </div>
-            </div>
-          </div>
-          <form class="contact-form" id="contact-form">
-            <div class="form-group">
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Your Name"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Your Email"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                placeholder="Subject"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <textarea
-                id="message"
-                name="message"
-                placeholder="Your Message"
-                rows="5"
-                required
-              ></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-content">
-          <p>&copy; <span id="footer-year"></span> Md Saharan Evan. All rights reserved.</p>
-          <div class="footer-social">
-            <a
-              href="https://www.linkedin.com/in/md-saharan-evan-951b6023a/"
-              target="_blank"
-              aria-label="LinkedIn"
-              ><i class="fab fa-linkedin-in"></i
-            ></a>
-            <a
-              href="https://github.com/Md-Saharan-Evan"
-              target="_blank"
-              aria-label="GitHub"
-              ><i class="fab fa-github"></i
-            ></a>
-            <a href="mailto:mdsaharanevan20001@gmail.com" aria-label="Email"
-              ><i class="fas fa-envelope"></i
-            ></a>
+            <form class="contact-form" id="contact-form">
+              <div class="form-row">
+                <input type="text" id="name" name="name" placeholder="Your Name" required />
+                <input type="email" id="email" name="email" placeholder="Your Email" required />
+              </div>
+              <input type="text" id="subject" name="subject" placeholder="Subject" required />
+              <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
+              <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
           </div>
-        </div>
-      </div>
-    </footer>
+        </section>
+
+        <footer class="footer">
+          <p>&copy; <span id="footer-year-main"></span> Md Saharan Evan. All rights reserved.</p>
+        </footer>
+      </main>
+    </div>
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="script.js"></script>
   </body>
